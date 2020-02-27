@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="CPE Catalog" max_length="40" name="x_85303_srtms2_cpe_catalog" type="collection">
+        <element display="true" label="Cpe23" max_length="255" name="cpe23" read_only="true" type="string"/>
+        <element label="Cpe edition" max_length="255" name="cpe_edition" type="string"/>
+        <element label="Cpe family" max_length="255" name="cpe_family" type="string"/>
+        <element label="Cpe islicensable" max_length="40" name="cpe_islicensable" type="boolean"/>
+        <element label="Cpe isopensource" max_length="40" name="cpe_isopensource" type="boolean"/>
+        <element label="Cpe issuite" max_length="40" name="cpe_issuite" type="boolean"/>
+        <element label="Cpe lifecycle eol" max_length="40" name="cpe_lifecycle_eol" type="glide_date_time"/>
+        <element label="Cpe lifecycle eos" max_length="40" name="cpe_lifecycle_eos" type="glide_date_time"/>
+        <element label="Cpe lifecycle ga" max_length="40" name="cpe_lifecycle_ga" type="glide_date_time"/>
+        <element label="Cpe majorversion" max_length="255" name="cpe_majorversion" type="string"/>
+        <element label="Cpe minorversion" max_length="255" name="cpe_minorversion" type="string"/>
+        <element label="Cpe product" max_length="255" name="cpe_product" type="string"/>
+        <element label="Cpe update" max_length="255" name="cpe_update" type="string"/>
+        <element label="Cpe vendor" max_length="255" name="cpe_vendor" type="string"/>
+        <element label="Cpe version" max_length="255" name="cpe_version" type="string"/>
+        <element label="editionname" max_length="255" name="editionname" type="string"/>
+        <element label="familyname" max_length="255" name="familyname" type="string"/>
+        <element label="majorversionname" max_length="255" name="majorversionname" type="string"/>
+        <element label="minorversionname" max_length="255" name="minorversionname" type="string"/>
+        <element label="productname" max_length="255" name="productname" type="string"/>
+        <element label="title" max_length="255" name="title" type="string"/>
+        <element label="updatename" max_length="255" name="updatename" type="string"/>
+        <element label="vendorname" max_length="255" name="vendorname" type="string"/>
+        <element label="versionname" max_length="255" name="versionname" type="string"/>
+        <index name="index">
+            <element name="cpe23"/>
+        </index>
+    </element>
+</database>

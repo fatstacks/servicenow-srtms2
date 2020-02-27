@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-02-27 00:12:31</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>434709dc2f934010281fd5f62799b6c9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_85303_srtms2_software_installation_cpe.x_85303_srtms2.software_installation_cpe_user</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_security_acl display_value="x_85303_srtms2_software_installation_cpe">874709dc2f934010281fd5f62799b6c6</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_434709dc2f934010281fd5f62799b6c9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-02-27 00:12:31</sys_updated_on>
+        <sys_user_role display_value="x_85303_srtms2.software_installation_cpe_user" name="x_85303_srtms2.software_installation_cpe_user">332df8902f934010281fd5f62799b686</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

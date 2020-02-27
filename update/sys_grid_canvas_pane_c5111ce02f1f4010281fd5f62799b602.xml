@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas_pane">
+    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+        <grid_canvas display_value="PA Overview - New Tab">8d1150e02f1f4010281fd5f62799b6a2</grid_canvas>
+        <height>10</height>
+        <portal_widget display_value="">0111d8e02f1f4010281fd5f62799b6f2</portal_widget>
+        <posx>0</posx>
+        <posy>96</posy>
+        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-02-27 14:54:06</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>c5111ce02f1f4010281fd5f62799b602</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>8d1150e02f1f4010281fd5f62799b6a2</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_update_name>sys_grid_canvas_pane_c5111ce02f1f4010281fd5f62799b602</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-02-27 14:54:06</sys_updated_on>
+        <width>12</width>
+    </sys_grid_canvas_pane>
+</record_update>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="create_missing_model" label="Create Missing Model" language="en" table="x_85303_srtms2_settings">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>create_missing_model</element>
+            <help/>
+            <hint/>
+            <label>Create Missing Model</label>
+            <language>en</language>
+            <name>x_85303_srtms2_settings</name>
+            <plural>Create Missing Models</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-02-26 14:40:53</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>357443482f1f0010281fd5f62799b63d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Create Missing Model</sys_name>
+            <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+            <sys_update_name>sys_documentation_x_85303_srtms2_settings_create_missing_model_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-02-26 14:40:53</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

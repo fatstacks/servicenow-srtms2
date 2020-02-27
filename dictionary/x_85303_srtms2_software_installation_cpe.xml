@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Software Installation CPE" max_length="40" name="x_85303_srtms2_software_installation_cpe" type="collection">
+        <element label="cpe23" max_length="32" name="cpe23" reference="x_85303_srtms2_cpe_catalog" type="reference"/>
+        <element label="Installed on" max_length="32" name="installed_on" reference="cmdb_ci_computer" type="reference"/>
+        <element label="Installed Software" max_length="32" name="installed_software" reference="cmdb_sam_sw_install" type="reference"/>
+        <element label="Is EOL" max_length="40" name="is_eol" type="boolean"/>
+        <element label="Is EOS" max_length="40" name="is_eos" type="boolean"/>
+        <index name="index">
+            <element name="installed_software"/>
+        </index>
+        <index name="index2">
+            <element name="installed_on"/>
+        </index>
+        <index name="index3">
+            <element name="cpe23"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Settings" max_length="40" name="x_85303_srtms2_settings" type="collection">
+        <element label="Active" max_length="10" name="active" type="boolean"/>
+        <element default="1000" label="API Page Size" max_length="40" name="api_page_size" type="integer"/>
+        <element label="Create Missing Manufacturer" max_length="40" name="create_missing_manufacturer" type="boolean"/>
+        <element label="Create Missing Model" max_length="40" name="create_missing_model" type="boolean"/>
+        <element label="Create Missing Resource" max_length="40" name="create_missing_resource" type="boolean"/>
+        <element label="Create Missing Software Discovery Model" max_length="40" name="create_missing_software_discovery_model" type="boolean"/>
+        <element label="Create Missing Software Installation" max_length="40" name="create_missing_software_installation" type="boolean"/>
+        <element label="GraphQL API Key" max_length="255" name="graphql_api_key" type="password2"/>
+        <element label="Last Run" max_length="40" name="last_run" read_only="true" type="glide_date_time"/>
+        <element choice="3" default="All" label="Module" max_length="40" name="module" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="All" sequence="0" value="all"/>
+                <element inactive_on_update="false" label="Software Asset Management" sequence="1" value="sam"/>
+            </choice>
+        </element>
+        <element choice="3" default="daily" label="Run" max_length="40" name="run" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Daily" sequence="0" value="daily"/>
+                <element inactive_on_update="false" label="Weekly" sequence="1" value="weekly"/>
+                <element inactive_on_update="false" label="Monthly" sequence="2" value="monthly"/>
+                <element inactive_on_update="false" label="Periodically" sequence="3" value="periodically"/>
+                <element inactive_on_update="false" label="Once" sequence="4" value="once"/>
+            </choice>
+        </element>
+        <element display="true" label="Service" max_length="255" name="service" read_only="true" type="string"/>
+        <element label="Status" max_length="255" name="status" type="string"/>
+        <element label="Time" max_length="40" name="time" type="glide_time"/>
+    </element>
+</database>

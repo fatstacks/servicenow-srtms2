@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_85303_srtms2.processSRTMS</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>processSRTMS</name>
+        <script><![CDATA[var processSRTMS = Class.create();
+processSRTMS.prototype = {
+    initialize: function() {
+    },
+	
+	getProcessSRTMS: function(vFullProcess){
+		var responseBody = "";
+		try {
+
+			//var callLog = new logTOsRTMS();
+			//callLog.setLog('','Info','Process sRTMS','Running');
+			
+			var grsetting = new GlideRecord('x_85303_srtms2_settings');
+			grsetting.get('service','sRTMS2');
+			//var vDeleteOldRec = grsetting.delete_old_records_automatically;
+			//var vSnowSrc = grsetting.servicenow;
+			//var vAwsSrc = grsetting.aws_source;
+			grsetting.status = "Running";
+			grsetting.update();
+
+			//callLog.setLog('','Info','Process sRTMS','Start Connect');
+			/*
+			var callConnect = new connectTOsRTMS();
+			var responseConnect = callConnect.getConnect();
+			if(responseConnect != "1")
+			{
+				responseBody = responseConnect;
+				return responseBody;
+			}
+			*/
+			//callLog.setLog('','Info','Process sRTMS','End Connect');
+			
+			/*
+			if(vFullProcess==true)
+			{
+				if(vSnowSrc)
+				{
+
+					//callLog.setLog('','Info','Trigger sRTMS Job','Start Job');
+					var trigJobSnow = new triggerJobSnowTOsRTMS();
+					var responseTrigJobSnow = trigJobSnow.getTriggerJob();
+					if(responseTrigJobSnow != "1")
+					{
+						responseBody = responseTrigJobSnow;
+						return responseBody;
+					}
+				}
+				
+				if(vAwsSrc)
+				{
+
+					//callLog.setLog('','Info','Trigger sRTMS Job','Start Job');
+					var trigJobAWS = new triggerJobAwsTOsRTMS();
+					var responseTrigJobAWS = trigJobAWS.getTriggerJob();
+					if(responseTrigJobAWS != "1")
+					{
+						responseBody = responseTrigJobAWS;
+						return responseBody;
+					}
+				}
+				
+				if(vSnowSrc || vAwsSrc)
+				{
+					//Saving Source Status
+					grsetting.servicenow_source_status = grsetting.servicenow;
+					grsetting.aws_source_status = grsetting.aws_source;
+					grsetting.update();
+
+					//Check Status
+					var statusJobSnow = new statusJobTOsRTMS();
+					var responseStatusJobSnow = statusJobSnow.getStatusJob();
+					if(responseStatusJobSnow == "2")
+					{
+						responseBody = responseStatusJobSnow;
+
+						var schStatusSnow = new GlideRecord('sysauto_script');
+						schStatusSnow.get('name', 'schedulerJobStatusTOsRTMS');
+						schStatusSnow.active=true;
+						schStatusSnow.update();
+
+						grsetting.status = 'Activate Scheduler';
+						grsetting.update();
+
+						responseBody = "1";
+						return responseBody;
+					}
+					else if(responseStatusJobSnow != "1")
+					{
+						responseBody = responseStatusJobSnow;
+						return responseBody;
+					}
+				}
+			}
+			*/
+			
+			//callLog.setLog('','Info','Pull results from sRTMS','Start Pulling');
+			
+			var callPull = new pullFROMsRTMS();
+			var responsePull = callPull.getPull();
+			/*
+			if(responsePull != "1")
+			{
+				responseBody = responsePull;
+				return responseBody;
+			}
+			*/
+			//vDeleteOldRec = false; 
+			/*
+			if(vDeleteOldRec)
+			{
+				//callLog.setLog('','Info','Delete old records','Start Deleting');
+				
+				var delOldRec = new deleteOldRecords();
+				var responseDeleletoldRec = delOldRec.getDelete();
+				if(responseDeleletoldRec != "1")
+				{
+					responseBody = responseDeleletoldRec;
+					return responseBody;
+				}
+			}
+			
+			var delOldLogs = new deleteOldLogs();
+			var responseDeleletoldLog = delOldLogs.getDelete();
+			if(responseDeleletoldLog != "1")
+			{
+				responseBody = responseDeleletoldLog;
+				return responseBody;
+			}
+			*/
+			
+			//callLog.setLog('','Info','Process sRTMS','Completed');
+			//grsetting.status = "Completed";
+			//grsetting.update();
+			
+			responseBody="1";
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+		}
+		
+		return responseBody;
+	},
+	
+    type: 'processSRTMS'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-02-25 21:18:41</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>59d5d73b2f830010281fd5f62799b62e</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>processSRTMS</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_update_name>sys_script_include_59d5d73b2f830010281fd5f62799b62e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-02-25 22:30:10</sys_updated_on>
+    </sys_script_include>
+</record_update>

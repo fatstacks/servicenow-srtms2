@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="d6973ab32f430010281fd5f62799b6f6" sys_domain="global" table="x_85303_srtms2_settings" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-02-25 19:06:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>da973ab32f430010281fd5f62799b6f8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_85303_srtms2_settings" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">d6973ab32f430010281fd5f62799b6f6</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">e1dee2fb2f030010281fd5f62799b62a</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-02-25 19:06:12</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-02-25 19:06:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d6973ab32f430010281fd5f62799b6f9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_85303_srtms2_settings" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">d6973ab32f430010281fd5f62799b6f6</sys_ui_form>
+            <sys_ui_section caption="License" display_value="License" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">9a973ab32f430010281fd5f62799b6f5</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-02-25 19:06:12</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-02-26 14:31:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a442c7c42f1f0010281fd5f62799b664</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_85303_srtms2_settings" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">d6973ab32f430010281fd5f62799b6f6</sys_ui_form>
+            <sys_ui_section caption="Options" display_value="Options" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">284287c42f1f0010281fd5f62799b668</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-02-26 14:31:15</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-02-25 19:19:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>31bafe372f430010281fd5f62799b6eb</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_85303_srtms2_settings" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">d6973ab32f430010281fd5f62799b6f6</sys_ui_form>
+            <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-02-26 14:31:15</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_85303_srtms2_settings</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-02-25 19:06:11</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d6973ab32f430010281fd5f62799b6f6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_85303_srtms2_settings</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+            <sys_update_name>sys_ui_form_sections_d6973ab32f430010281fd5f62799b6f6</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-02-25 19:06:11</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

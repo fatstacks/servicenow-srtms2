@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_parameters">
+    <sys_rest_message_fn_parameters action="INSERT_OR_UPDATE">
+        <name>TOKEN</name>
+        <rest_message_function display_value="allCpe - TOKEN">8353f0542f534010281fd5f62799b654</rest_message_function>
+        <sys_class_name>sys_rest_message_fn_parameters</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-02-26 22:47:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>3dd3b0942f534010281fd5f62799b62b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TOKEN</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_update_name>sys_rest_message_fn_parameters_3dd3b0942f534010281fd5f62799b62b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-02-26 22:47:47</sys_updated_on>
+        <type>string</type>
+        <value>eyJ2ZXJzaW9uIjoyLCJ0b2tlbiI6IkFRSUNBSGkrT2loUXVpRWFIT0Z5TUMwK3VKSzMvK0F1Y0hzR2NIdFljYlA4YytlNy9nRmtGZ3hROHBzZ2JuU0NicHZEdnplL0FBQUM3VENDQXVrR0NTcUdTSWIzRFFFSEJxQ0NBdG93Z2dMV0FnRUFNSUlDendZSktvWklodmNOQVFjQk1CNEdDV0NHU0FGbEF3UUJMakFSQkF4NWdpZzlZNWUzTldKeEU4Z0NBUkNBZ2dLZ1U5ZWJDWEU3WkhEWHRpQndsNUxhVmZCMkxUSmlrU3hENUQzdlpVSXhyZm9VWnVVejBJMFZYMnB5cFFzMXZaVUQ0bFlmdTUxWGhSU083Z3J5RU04Q3B3dUpuRkl2N0J4azdaQlV3UU45M1RNS1VDdklvT05US2FlZytlMWtiWStGMTUwZTF1UE16VytMOCtBY0QyNWlkcE56RjlhbXQwb2ZmRVc4NEloY09wVWxBSEs0Z0cwQjFKOTZJQktWcVozbEhLVjUzaU5xajVyYnZsQVBlWklxNEJmUktOVDFXQUJpME1RZ0xDZkNYeHZ1VUtuYjIzOHYrK0pNVGtGTDVOdGZSNTVPN3Y4OVhCY0FmQmUwUHBsUktDMUJTbHl0QW1TMVI3c05YY1JwMEhjRWZDbHhLN0UyT3k2V0pnMVhTOHhIa04vbm1wRUNMUnlhSExjSk52SHFzZzdCZVVzakZKdnRkNCs4TVFlREp0SHM4TUNGeWlhZkNGaEl6bjNFTzA2Y0NjTWo4YmdMWXg3ZE5KZ0RMSDJJNGFoU3N1MVBrQ3BTZGN5ZG5kZ0gxbk5NR2ttRmhOUm03azBTSWN6eEIxaGRMQkR2NVN6QXhWdE9Ray9YMVVabFVHR01EZDBMb3ZESXNQSFhBMjJ2WnVVSlp1cTM0cXJKZmdmVEw5c2tkNGtmeXNhN25HZ3RERUVsaldyN2tRZTVSUkhRakt1NHgrUC9KOVNOK0kvQmliWDV3N1FOWGVxVFZpWUY5QjZWSnRTYllKQzZkU2hkdlkrWUduS2RJbDYyamNVTlJVK1hNZ1h2dFIwOW1NQjhyZ0txZ29nZDY2OENlTE9tWGFXZ2xNUDc4NGsySFpxNDBwcitUOXJOV0Y0cmVENmxRUVMzVi9vS09MTmV3S3dBekxoSGhIdjZFRzlWNzlOMTdlYmorMi9lbGdHZjJtTWtzTmhoRnpaeTZOMHoydFdqZDdHM2pXZkNYWG8xYnV2Mlg1c2tVbGZ3VWY5MUNWOFhLMDZYRXhjdFlGYlFjYVpsMlpXQ0tlVjkvMkxjaENmYmlkSW12cnVaSzA1bEloSlYvcHM0WFdrMkpIYUNlN2FIcjUvTHhFaTRYNVY4TzhqMUQ5L1o2dHhoT2RPVEwreHB5clhLdXhMd21haUJ3Skp5NUZzS2lVQU9oS0x1UUt5bi9OOHVIRDZJIn0=</value>
+    </sys_rest_message_fn_parameters>
+</record_update>

@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_85303_srtms2.pullFROMsRTMS</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>pullFROMsRTMS</name>
+        <script><![CDATA[var pullFROMsRTMS = Class.create();
+pullFROMsRTMS.prototype = {
+    initialize: function() {
+    },
+	
+
+	getCpeAPI: function(vGraphQLAPIKey,vNextToken,vPageSize){
+		var responseBody = "";
+		var responseObj = {};
+		
+		var grsetting = new GlideRecord('x_85303_srtms2_settings');
+		grsetting.get('service','sRTMS2');
+		
+		grsetting.status = 'enter in getCpeAPI';
+		grsetting.update();
+		
+		try {
+			
+			var rmethod = 'allCpe - NOTOKEN';
+			if(vNextToken!="")
+				rmethod = 'allCpe - TOKEN';
+							
+			var r = new sn_ws.RESTMessageV2('x_85303_srtms2.sRTMS2 - Pull', rmethod);
+					
+			r.setStringParameter('APIKEY', vGraphQLAPIKey);
+			r.setStringParameter('TOKEN', vNextToken);
+			r.setStringParameter('PAGESIZE', vPageSize);
+			
+			var response = r.execute();
+			responseBody = response.getBody();
+			responseObj.responseBody = responseBody;
+			var httpStatus = response.getStatusCode();
+
+			var js = JSON.parse(responseBody);
+			
+			grsetting.status = responseBody;
+			grsetting.update();
+			
+			if(httpStatus=="200")
+			{
+				var data = js.data;
+				var allCpe = data.allCpe;
+				var items = allCpe.items;
+				var nextToken = allCpe.nextToken;
+
+				responseObj.nextToken = nextToken;
+				
+				for (var i = 0; i < items.length ; i++){
+					
+					var cpe23 = items[i].cpe23;
+					var cpe = items[i].cpe;
+
+					var cpe_part = cpe.cpe_part;
+					var cpe_vendor = cpe.cpe_vendor;
+					var cpe_family = cpe.cpe_family;
+					var cpe_product = cpe.cpe_product;
+					var cpe_edition = cpe.cpe_edition;
+					var cpe_majorversion = cpe.cpe_majorversion;
+					var cpe_minorversion = cpe.cpe_minorversion;
+					var cpe_version = cpe.cpe_version;
+					var cpe_update = cpe.cpe_update;
+					var cpe_islicensable = cpe.cpe_islicensable;
+					var cpe_isopensource = cpe.cpe_isopensource;
+					var cpe_issuite = cpe.cpe_issuite;
+					var cpe_lifecycle_ga = cpe.cpe_lifecycle_ga;
+					var cpe_lifecycle_eol = cpe.cpe_lifecycle_eol;
+					var cpe_lifecycle_eos = cpe.cpe_lifecycle_eos;
+					
+					var cpe_title = cpe.cpe_title;
+					
+					var vendorname = cpe_title.vendorname;
+					var familyname = cpe_title.familyname;
+					var productname = cpe_title.productname;
+					var editionname = cpe_title.editionname;
+					var majorversionname = cpe_title.majorversionname;
+					var minorversionname = cpe_title.minorversionname;
+					var versionname = cpe_title.versionname;
+					var updatename = cpe_title.updatename;
+					var title = cpe_title.title;
+					
+					grsetting.status = productname;
+					grsetting.update();
+					
+					//CPE Catalog
+					var grCpeCatalog = new GlideRecord('x_85303_srtms2_cpe_catalog');
+					var cpecatf=true;
+										
+					if(!grCpeCatalog.get('cpe23',cpe23)){
+
+						cpecatf = false;
+
+						grCpeCatalog.initialize();
+						
+						grCpeCatalog.cpe23=cpe23;
+						grCpeCatalog.cpe_part=cpe_part;
+						grCpeCatalog.cpe_vendor=cpe_vendor;
+						grCpeCatalog.cpe_product=cpe.cpe_product;
+						grCpeCatalog.cpe_edition=cpe_edition;
+						grCpeCatalog.cpe_majorversion=cpe_majorversion;
+						grCpeCatalog.cpe_minorversion=cpe_minorversion;
+						grCpeCatalog.cpe_version=cpe_version;
+						grCpeCatalog.cpe_update=cpe_update;
+						
+						grCpeCatalog.cpe_islicensable=cpe_islicensable;
+						grCpeCatalog.cpe_isopensource=cpe_isopensource;
+						grCpeCatalog.cpe_issuite=cpe_issuite;
+						grCpeCatalog.cpe_lifecycle_ga=cpe_lifecycle_ga;
+						grCpeCatalog.cpe_lifecycle_eol=cpe_lifecycle_eol;
+						grCpeCatalog.cpe_lifecycle_eos=cpe_lifecycle_eos;
+						
+						grCpeCatalog.vendorname=vendorname;
+						grCpeCatalog.familyname=familyname;
+						grCpeCatalog.productname=productname;
+						grCpeCatalog.editionname=editionname;
+						grCpeCatalog.majorversionname=majorversionname;
+						grCpeCatalog.minorversionname=minorversionname;
+						grCpeCatalog.versionname=versionname;
+						grCpeCatalog.updatename=updatename;
+						grCpeCatalog.title=title;
+						
+						grCpeCatalog.insert();
+						
+						cpecatf = true;
+					}
+				}
+			}
+			
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+			responseObj.responseBody = ex.getMessage();
+		}
+		return responseObj;
+	},
+	
+	getSoftwareAPI: function(vGraphQLAPIKey,vNextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,vResourceID,vInstalledOn){
+		var responseBody = "";
+		var responseObj = {};
+		
+		var grsetting = new GlideRecord('x_85303_srtms2_settings');
+		grsetting.get('service','sRTMS2');
+		
+		grsetting.status = 'enter in getSoftwareAPI';
+		grsetting.update();
+		
+		try {
+
+			var rmethod = 'getResourceSoftware - NOTOKEN';
+			if(vNextToken!="")
+				rmethod = 'getResourceSoftware - TOKEN';
+							
+			var r = new sn_ws.RESTMessageV2('x_85303_srtms2.sRTMS2 - Pull', rmethod);
+					
+			r.setStringParameter('APIKEY', vGraphQLAPIKey);
+			r.setStringParameter('TOKEN', vNextToken);
+			r.setStringParameter('PAGESIZE', vPageSize);
+			r.setStringParameter('RESOURCEID', vResourceID);
+			
+			var response = r.execute();
+			responseBody = response.getBody();
+			responseObj.responseBody = responseBody;
+			var httpStatus = response.getStatusCode();
+
+			var js = JSON.parse(responseBody);
+			
+			if(httpStatus=="200")
+			{
+				var data = js.data;
+				var getResourceSoftware = data.getResourceSoftware;
+				var items = getResourceSoftware.items;
+				var nextToken = getResourceSoftware.nextToken;
+
+				responseObj.nextToken = nextToken;
+				
+				for (var i = 0; i < items.length ; i++){
+
+					var cpe23 = items[i].cpe23;
+					var details = items[i].details;
+					var cpe = items[i].cpe;
+					var isgrp = items[i].isgrp;
+					var iscmp = items[i].iscmp;
+					
+					var cpe_vendor = cpe.cpe_vendor;
+					var cpe_product = cpe.cpe_product;
+					var cpe_edition = cpe.cpe_edition;
+					var cpe_majorversion = cpe.cpe_majorversion;
+					var cpe_minorversion = cpe.cpe_minorversion;
+					var cpe_version = cpe.cpe_version;
+					var cpe_update = cpe.cpe_update;
+					
+					var cpe_title = cpe.cpe_title;
+					
+					var vendorname = cpe_title.vendorname;
+					var productname = cpe_title.productname;
+					var editionname = cpe_title.editionname;
+					var majorversionname = cpe_title.majorversionname;
+					var minorversionname = cpe_title.minorversionname;
+					var versionname = cpe_title.versionname;
+					var updatename = cpe_title.updatename;
+					
+					var cpe_lifecycle_eol = cpe.cpe_lifecycle_eol;
+					var cpe_lifecycle_eos = cpe.cpe_lifecycle_eos;
+					
+					var is_eol = false;
+					var is_eos = false;
+					var gDateTimeNow = new GlideDateTime();
+					
+					try{
+						var gDateTimeEOL = new GlideDateTime(cpe_lifecycle_eol);	
+						if(gDateTimeEOL <= gDateTimeNow)
+							is_eol = true;
+					}catch(ex){
+						
+					}
+					
+					try{
+						var gDateTimeEOS = new GlideDateTime(cpe_lifecycle_eos);			
+						if(gDateTimeEOS <= gDateTimeNow)
+							is_eos = true;
+					}catch(ex){
+						
+					}
+											
+					for (var j = 0; j < details.length ; j++){
+						
+						var type = details[j].type;
+												
+						if(type=='package'){
+							
+							//grsetting.status = 'enter package';
+							//grsetting.update();
+							
+							//Software Discovery Model
+							var grSwDiscModel = new GlideRecord('cmdb_sam_sw_discovery_model');
+							var swdiscmodf=true;
+						
+							var pkgmanufacturer = details[j].pkgmanufacturer;
+							var pkgdisplayname = details[j].pkgdisplayname;
+							var pkgversion = details[j].pkgversion;
+							var resourcepkgid = '';
+							
+							var pkgPrimaryKey=pkgmanufacturer+'.'+pkgdisplayname+'..'+pkgversion+'.';
+
+							//grsetting.status = pkgPrimaryKey;
+							//grsetting.update();
+							
+							//grsetting.status = 'pre enter Discmodel';
+							//grsetting.update();
+							
+							if(!grSwDiscModel.get('primary_key',pkgPrimaryKey))
+							{
+								swdiscmodf = false;
+								
+								if(!swdiscmodf && vCreateSwDiscModel)
+								{
+									grSwDiscModel.initialize();
+									grSwDiscModel.publisher=pkgmanufacturer;
+									grSwDiscModel.display_name=pkgdisplayname;
+									grSwDiscModel.version=pkgversion;
+									grSwDiscModel.primary_key=pkgPrimaryKey;
+									grSwDiscModel.insert();
+									swdiscmodf = true;
+								}
+							}
+							
+							//grsetting.status = 'pre enter software';
+							//grsetting.update();
+							
+							//Software Installation
+							var grSwInstallation = new GlideRecord('cmdb_sam_sw_install');
+							var swinstf=true;
+							
+							//grsetting.status = 'Software Exists ?';
+							//grsetting.update();
+							
+							if(!grSwInstallation.get('sys_id',resourcepkgid))
+							{
+								grsetting.status = 'Create Software';
+								grsetting.update();
+								
+								grSwInstallation = new GlideRecord('cmdb_sam_sw_install');
+								swinstf=false;
+								
+								var querySwInstallation ="discovery_model="+grSwDiscModel.sys_id+"^installed_on="+vInstalledOn+"";
+								grSwInstallation.addEncodedQuery(querySwInstallation);
+								grSwInstallation.query();
+
+								while (grSwInstallation.next()) {
+									swinstf=true;
+									break;
+								}
+								
+								if(!swinstf && vCreateSwInstallation)
+								{
+									
+									grSwInstallation.initialize();
+									grSwInstallation.installed_on=vInstalledOn;								
+									
+									grSwInstallation.publisher=pkgmanufacturer;
+									grSwInstallation.display_name=pkgdisplayname;
+									grSwInstallation.version=pkgversion;
+									
+									if(swdiscmodf)
+										grSwInstallation.discovery_model=grSwDiscModel.sys_id;
+									
+									grSwInstallation.is_normalized = true;
+									
+									if(vendorname!=null){
+										grSwInstallation.normalized_publisher = vendorname;
+									}else if(cpe_vendor != '*'){
+										grSwInstallation.normalized_publisher = cpe_vendor;
+									}else{
+										grSwInstallation.normalized_publisher = '';
+									}
+									
+									if(productname!=null){
+										if(editionname!=null){
+											grSwInstallation.normalized_display_name = productname+' '+editionname;
+										}else if(cpe_edition!='*'){
+											grSwInstallation.normalized_display_name = productname+' '+cpe_edition;
+										}else{
+											grSwInstallation.normalized_display_name = productname;
+										}
+									}else if(cpe_product!='*'){
+										grSwInstallation.normalized_display_name = cpe_product;
+									}else{
+										grSwInstallation.normalized_display_name = '';
+									}
+									
+									if(updatename!=null){
+										if(versionname!=null){
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ['+ versionname +']' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ['+ versionname +']' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ['+ versionname +']' + ' ' + updatename;
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ['+ versionname +']' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ['+ versionname +']' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ['+ versionname +']' + ' ' + updatename;
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ['+ versionname +']' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ['+ versionname +']' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = ' ['+ versionname +']' + ' ' + updatename;
+												}
+											}
+										}else if(cpe_version!='*'){
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = ' ['+ cpe_version +']' + ' ' + updatename;
+												}
+											}
+										}else{
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ' + updatename;
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ' + updatename;
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ' + updatename;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ' + updatename;
+												}
+												else{
+													grSwInstallation.normalized_version = updatename;
+												}
+											}
+										}
+									}else if(cpe_update!='*'){
+										if(versionname!=null){
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = ' ['+ versionname +']' + ' ' + cpe_update;
+												}
+											}
+										}else if(cpe_version!='*'){
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = ' ['+ cpe_version +']' + ' ' + cpe_update;
+												}
+											}
+										}else{
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ' + cpe_update;
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ' + cpe_update;
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ' + cpe_update;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ' + cpe_update;
+												}
+												else{
+													grSwInstallation.normalized_version = cpe_update;
+												}
+											}
+										}
+									}else{
+										if(versionname!=null){
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ['+ versionname +']';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ['+ versionname +']';
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ['+ versionname +']';
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ['+ versionname +']';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ['+ versionname +']';
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ['+ versionname +']';
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ['+ versionname +']';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ['+ versionname +']';
+												}
+												else{
+													grSwInstallation.normalized_version = ' ['+ versionname +']';
+												}
+											}
+										}else if(cpe_version!='*'){
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')' + ' ['+ cpe_version +']';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')' + ' ['+ cpe_version +']';
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')' + ' ['+ cpe_version +']';
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')' + ' ['+ cpe_version +']';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')' + ' ['+ cpe_version +']';
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')' + ' ['+ cpe_version +']';
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' ['+ cpe_version +']';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' ['+ cpe_version +']';
+												}
+												else{
+													grSwInstallation.normalized_version = ' ['+ cpe_version +']';
+												}
+											}
+										}else{
+											if(minorversionname!=null){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + minorversionname + ')';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + minorversionname + ')';
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + minorversionname + ')';
+												}
+											}else if(cpe_minorversion!='*'){
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname + ' (' + cpe_minorversion + ')';
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion + ' (' + cpe_minorversion + ')';
+												}
+												else{
+													grSwInstallation.normalized_version = '(' + cpe_minorversion + ')';
+												}
+											}else{
+												if(majorversionname!=null){
+													grSwInstallation.normalized_version = majorversionname;
+												}
+												else if(cpe_majorversion!='*'){
+													grSwInstallation.normalized_version = cpe_majorversion;
+												}
+												else{
+													grSwInstallation.normalized_version = '';
+												}
+											}
+										}
+									}
+
+									grSwInstallation.insert();
+									swinstf = true;
+								}
+							}
+							
+							//CPE Catalog
+							var grCpeCatalog = new GlideRecord('x_85303_srtms2_cpe_catalog');
+							var cpecatf=true;
+						
+							grsetting.status = 'pre enter CpeCatalog';
+							grsetting.update();
+							
+							if(!grCpeCatalog.get('cpe23',cpe23))
+								cpecatf = false;
+
+							
+							if(swinstf && cpecatf){
+								
+								//Software Installation CPE
+								var grSwInstallationCpe = new GlideRecord('x_85303_srtms2_software_installation_cpe');
+								var swinstcpef=false;
+
+								var querySwInstallationCpe ="cpe23="+grCpeCatalog.sys_id+"^installed_software="+grSwInstallation.sys_id+"^installed_on="+vInstalledOn+"";							
+								grSwInstallationCpe.addEncodedQuery(querySwInstallationCpe);							
+								grSwInstallationCpe.query();
+
+								while (grSwInstallationCpe.next()) {
+									swinstcpef=true;
+									break;
+								}
+
+								if(!swinstcpef){
+									
+									grSwInstallationCpe.initialize();
+									grSwInstallationCpe.cpe23=grCpeCatalog.sys_id;
+									grSwInstallationCpe.installed_software=grSwInstallation.sys_id;
+									grSwInstallationCpe.installed_on=vInstalledOn;			
+									grSwInstallationCpe.is_eol=is_eol;
+									grSwInstallationCpe.is_eos=is_eos;									
+
+									grSwInstallationCpe.insert();
+									swinstcpef = true;
+									
+								}
+								
+								grsetting.status = 'END';
+								grsetting.update();
+								
+								
+							}
+
+						}
+					}
+				}
+			}
+			
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+			responseObj.responseBody = ex.getMessage();
+		}
+		return responseObj;
+	},
+		
+	getResourceAPI: function(vGraphQLAPIKey,vNextToken,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation){
+		
+		var responseBody = "";
+		var responseObj = {};
+		
+		var grsetting = new GlideRecord('x_85303_srtms2_settings');
+		grsetting.get('service','sRTMS2');
+				
+		try {
+			
+			var rmethod = 'allResource - NOTOKEN';
+			if(vNextToken!="")
+				rmethod = 'allResource - TOKEN';
+							
+			var r = new sn_ws.RESTMessageV2('x_85303_srtms2.sRTMS2 - Pull', rmethod);
+					
+			r.setStringParameter('APIKEY', vGraphQLAPIKey);
+			r.setStringParameter('TOKEN', vNextToken);
+			r.setStringParameter('PAGESIZE', vPageSize);
+			
+			var response = r.execute();
+			responseBody = response.getBody();
+			responseObj.responseBody = responseBody;
+			var httpStatus = response.getStatusCode();
+
+			var js = JSON.parse(responseBody);
+			
+			if(httpStatus=="200")
+			{
+				
+				var data = js.data;
+				var allResource = data.allResource;
+				var items = allResource.items;
+				var nextToken = allResource.nextToken;
+						
+				responseObj.nextToken = nextToken;
+				
+				for (var i = 0; i < items.length ; i++){
+
+					var resourceid = items[i].resourceid;
+					var resourcename = items[i].resourcename;
+					var resourcedomain = items[i].resourcedomain;
+					var serialnumber = items[i].serialnumber;
+					var manufacturer = items[i].manufacturer;
+					var model = items[i].model;
+					var osname = items[i].osname;
+					var osservicepack = items[i].osservicepack;
+					var osinstalldate = items[i].osinstalldate;
+					var osbit = items[i].osbit;
+					var ipaddress = items[i].ipaddress;
+					var macaddress = items[i].macaddress;
+					var lastscan = items[i].lastscan;
+					var isvirtual = items[i].isvirtual;
+					
+					var grComputer = new GlideRecord('cmdb_ci_computer');
+					var compf=true;
+
+					if(!grComputer.get('sys_id',resourceid))
+					{
+						compf=false;
+						
+						var queryComputerString = "name="+resourcename+"^os_domain="+resourcedomain+"^serial_number="+serialnumber+"";
+						
+						grComputer = new GlideRecord('cmdb_ci_computer');
+						grComputer.addEncodedQuery(queryComputerString);
+						grComputer.query();					
+						
+						while (grComputer.next()) {
+							//gs.addInfoMessage(gr.number);
+							compf = true;
+							break;
+						}
+						
+						if(!compf && vCreateResource)
+						{
+							//Hardware Manufacturer
+							var grManufacturer = new GlideRecord('core_company');
+							var manf=true;
+							if(!grManufacturer.get('name',manufacturer))
+							{
+								manf=false;
+
+								if(!manf && vCreateManufacturer)
+								{
+									grManufacturer.initialize();
+									grManufacturer.name=manufacturer;
+									grManufacturer.manufacturer=true;
+									grManufacturer.insert();
+									manf = true;
+								}
+							}
+							
+							//Hardware Model
+							var grModel = new GlideRecord('cmdb_hardware_product_model');
+							var modf=true;
+							var mod_display_name = manufacturer+' '+model;
+							if(!grModel.get('display_name',mod_display_name))
+							{
+								modf=false;
+
+								if(!modf && vCreateModel)
+								{
+									grModel.initialize();
+									grModel.display_name=mod_display_name;
+									grModel.name=model;
+									
+									if(manf)
+										grModel.manufacturer=grManufacturer.sys_id;
+									
+									grModel.insert();
+									modf = true;
+								}
+							}
+							
+							grComputer.initialize();
+							grComputer.name=resourcename;
+							grComputer.os_domain=resourcedomain;
+							grComputer.serial_number=serialnumber;
+							grComputer.os=osname;
+							grComputer.os_service_pack=osservicepack;
+							grComputer.install_date=osinstalldate;
+							grComputer.os_address_width=osbit;
+							grComputer.ip_address=ipaddress;
+							grComputer.mac_address=macaddress;
+							grComputer.last_discovered=lastscan;
+							grComputer.virtual=isvirtual;
+							
+							if(manf)
+								grComputer.manufacturer=grManufacturer.sys_id;
+							
+							if(modf)
+								grComputer.model_id=grModel.sys_id;
+							
+							//assigned_to
+							grComputer.insert();
+							compf = true;
+							
+						}
+						
+					}
+					
+					if(compf)
+					{
+						var installed_on = grComputer.sys_id;
+						
+						if(vModule == "All" || vModule == "sam"){
+							
+							
+							grsetting.status = 'pre software init 1';
+							grsetting.update();
+
+							var getSoftwareAPI = this.getSoftwareAPI(vGraphQLAPIKey,vNextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,resourceid,installed_on);
+
+							grsetting.status = 'post softwareinit 1';
+							grsetting.update();
+							
+							var apisoftwarecounter=1;
+							
+							while(getSoftwareAPI.nextToken!=null && getSoftwareAPI.nextToken!=''){
+
+								grsetting.status = 'software loop '+apisoftwarecounter.toString();
+								grsetting.update();
+
+								i +=1;
+
+								getSoftwareAPI = this.getSoftwareAPI(vGraphQLAPIKey,getSoftwareAPI.nextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,resourceid,installed_on);
+
+							}
+
+							grsetting.status = 'software job completed in '+apisoftwarecounter.toString()+' loops';
+							grsetting.update();
+							
+						}
+					}				
+				}
+	
+				responseObj.responseBody = "1";
+			}
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+			responseObj.responseBody = ex.getMessage();
+		}
+		return responseObj;
+
+	},
+	
+	getPull: function(){
+		var responseBody = "";
+		try {
+			//var callLog = new logTOsRTMS();
+			var grsetting = new GlideRecord('x_85303_srtms2_settings');
+			grsetting.get('service','sRTMS2');
+			
+			grsetting.status = "TEST TEST TEST";
+			grsetting.update();
+			
+
+			var vGraphQLAPIKey = grsetting.graphql_api_key.getDecryptedValue();			
+			var vNextToken = '';
+			var vPageSize = grsetting.api_page_size;
+			var vModule = grsetting.module;
+			var vCreateResource = grsetting.create_missing_resource;
+			var vCreateManufacturer = grsetting.create_missing_manufacturer;
+			var vCreateModel = grsetting.create_missing_model;
+			var vCreateSwDiscModel = grsetting.create_missing_software_discovery_model;
+			var vCreateSwInstallation = grsetting.create_missing_software_installation;
+			
+			//CPE API call
+			grsetting.status = 'pre CPE init 1';
+			grsetting.update();
+			
+			var getCpeAPI = this.getCpeAPI(vGraphQLAPIKey,'',vPageSize);
+			
+			grsetting.status = 'post CPE init 1';
+			grsetting.update();
+			
+			
+			var apicpecounter=1;
+			
+			while(getCpeAPI.nextToken!=null && getCpeAPI.nextToken!=''){
+				
+				grsetting.status = 'Resource loop '+apicpecounter.toString();
+				grsetting.update();
+				
+				apicpecounter +=1;
+				
+				getCpeAPI = this.getCpeAPI(vGraphQLAPIKey,getCpeAPI.nextToken,vPageSize);
+				
+			}
+			
+			
+			grsetting.status = 'CPE job completed in '+apicpecounter.toString()+' loops';
+			grsetting.update();
+			
+			
+			//Resource API call
+			grsetting.status = 'pre Resource init 1';
+			grsetting.update();
+			
+			
+			var getResourceAPI = this.getResourceAPI(vGraphQLAPIKey,'',vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
+			
+			grsetting.status = 'post Resourceinit 1';
+			grsetting.update();
+			
+			
+			var apiresourcecounter=1;
+			while(getResourceAPI.nextToken!=null && getResourceAPI.nextToken!=''){
+				
+				//grsetting.status = 'Resource loop '+apiresourcecounter.toString();
+				//grsetting.update();
+				
+				apiresourcecounter +=1;
+				
+				getResourceAPI = this.getResourceAPI(vGraphQLAPIKey,getResourceAPI.nextToken,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
+				
+			}
+			
+			
+			grsetting.status = 'Resource job completed in '+apiresourcecounter.toString()+' loops';
+			grsetting.update();
+		
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+		}
+		
+		return responseBody;
+	},
+	
+    type: 'pullFROMsRTMS'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-02-25 21:32:46</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>a4d8937b2f830010281fd5f62799b67e</sys_id>
+        <sys_mod_count>221</sys_mod_count>
+        <sys_name>pullFROMsRTMS</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_update_name>sys_script_include_a4d8937b2f830010281fd5f62799b67e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-02-27 18:16:10</sys_updated_on>
+    </sys_script_include>
+</record_update>
