@@ -5,6 +5,7 @@
         <element label="Installed Software" max_length="32" name="installed_software" reference="cmdb_sam_sw_install" type="reference"/>
         <element label="Is EOL" max_length="40" name="is_eol" type="boolean"/>
         <element label="Is EOS" max_length="40" name="is_eos" type="boolean"/>
+        <element label="Last Run" max_length="40" name="last_run" type="glide_date_time"/>
         <index name="index">
             <element name="installed_software"/>
         </index>
@@ -12,6 +13,9 @@
             <element name="installed_on"/>
         </index>
         <index name="index3">
+            <element name="last_run"/>
+        </index>
+        <index name="index4">
             <element name="cpe23"/>
         </index>
     </element>

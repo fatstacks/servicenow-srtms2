@@ -15,16 +15,34 @@ processSRTMS.prototype = {
 		var responseBody = "";
 		try {
 
-			//var callLog = new logTOsRTMS();
-			//callLog.setLog('','Info','Process sRTMS','Running');
+			var vLastRun =  new GlideDateTime();
+			
+			var callLog = new logTOsRTMS();
+			callLog.setLog(vLastRun,'Info','Process','Start');
 			
 			var grsetting = new GlideRecord('x_85303_srtms2_settings');
 			grsetting.get('service','sRTMS2');
-			//var vDeleteOldRec = grsetting.delete_old_records_automatically;
+			
+			//var vDeleteOutdatedRecords = grsetting.delete_outdated_records;
 			//var vSnowSrc = grsetting.servicenow;
 			//var vAwsSrc = grsetting.aws_source;
-			grsetting.status = "Running";
+			
+			var vGraphQLAPIKey = grsetting.graphql_api_key.getDecryptedValue();			
+			var vPageSize = grsetting.api_page_size;
+			var vModule = grsetting.module;
+			var vCreateResource = grsetting.create_missing_resource;
+			var vCreateManufacturer = grsetting.create_missing_manufacturer;
+			var vCreateModel = grsetting.create_missing_model;
+			var vCreateSwDiscModel = grsetting.create_missing_software_discovery_model;
+			var vCreateSwInstallation = grsetting.create_missing_software_installation;
+			
+			
+			grsetting.last_run = vLastRun;
+			grsetting.status = 'Running';
 			grsetting.update();
+			
+			
+			
 
 			//callLog.setLog('','Info','Process sRTMS','Start Connect');
 			/*
@@ -101,44 +119,38 @@ processSRTMS.prototype = {
 			}
 			*/
 			
-			//callLog.setLog('','Info','Pull results from sRTMS','Start Pulling');
+			callLog.setLog(vLastRun,'info','Pull results from sRTMS','Start');
 			
 			var callPull = new pullFROMsRTMS();
-			var responsePull = callPull.getPull();
-			/*
-			if(responsePull != "1")
+			var responsePull = callPull.getPull(vLastRun,vGraphQLAPIKey,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
+
+			if(responsePull.responseBody != '1')
 			{
-				responseBody = responsePull;
+				responseBody = responsePull.responseBody;
 				return responseBody;
 			}
-			*/
-			//vDeleteOldRec = false; 
-			/*
-			if(vDeleteOldRec)
-			{
-				//callLog.setLog('','Info','Delete old records','Start Deleting');
-				
-				var delOldRec = new deleteOldRecords();
-				var responseDeleletoldRec = delOldRec.getDelete();
-				if(responseDeleletoldRec != "1")
-				{
-					responseBody = responseDeleletoldRec;
-					return responseBody;
-				}
-			}
+
+			callLog.setLog(vLastRun,'info','Pull results from sRTMS','End');
 			
-			var delOldLogs = new deleteOldLogs();
-			var responseDeleletoldLog = delOldLogs.getDelete();
-			if(responseDeleletoldLog != "1")
+			//Delete Outdated Logs
+			callLog.setLog(vLastRun,'info','Delete outdated logs','Start');
+			
+			var delOutdatedLogs = new deleteOutdatedLogs();
+			var responseDelOutdatedLogs = delOutdatedLogs.getDelete(vLastRun);
+			
+			if(responseDelOutdatedLogs.responseBody != '1')
 			{
-				responseBody = responseDeleletoldLog;
+				responseBody = responseDelOutdatedLogs.responseBody;
 				return responseBody;
 			}
-			*/
 			
-			//callLog.setLog('','Info','Process sRTMS','Completed');
-			//grsetting.status = "Completed";
-			//grsetting.update();
+			callLog.setLog(vLastRun,'info','Delete outdated logs','End');
+			
+			//Completed
+			callLog.setLog(vLastRun,'info','Process sRTMS','End');
+			
+			grsetting.status = "Completed";
+			grsetting.update();
 			
 			responseBody="1";
 		}
@@ -157,7 +169,7 @@ processSRTMS.prototype = {
         <sys_created_on>2020-02-25 21:18:41</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>59d5d73b2f830010281fd5f62799b62e</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>25</sys_mod_count>
         <sys_name>processSRTMS</sys_name>
         <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
         <sys_policy>read</sys_policy>
@@ -165,6 +177,6 @@ processSRTMS.prototype = {
         <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
         <sys_update_name>sys_script_include_59d5d73b2f830010281fd5f62799b62e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-02-25 22:30:10</sys_updated_on>
+        <sys_updated_on>2020-03-09 00:57:22</sys_updated_on>
     </sys_script_include>
 </record_update>

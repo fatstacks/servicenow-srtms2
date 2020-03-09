@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Log" max_length="40" name="x_85303_srtms2_log" type="collection">
+        <element label="Activity" max_length="100" name="activity" type="string"/>
+        <element label="Last Run" max_length="40" name="last_run" type="glide_date_time"/>
+        <element label="Message" max_length="255" name="message" type="string"/>
+        <element choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Info" value="info"/>
+            </choice>
+        </element>
+    </element>
+</database>

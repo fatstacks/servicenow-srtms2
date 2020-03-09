@@ -12,15 +12,9 @@ pullFROMsRTMS.prototype = {
     },
 	
 
-	getCpeAPI: function(vGraphQLAPIKey,vNextToken,vPageSize){
+	getCpeAPI: function(vLastRun,vGraphQLAPIKey,vNextToken,vPageSize){
 		var responseBody = "";
 		var responseObj = {};
-		
-		var grsetting = new GlideRecord('x_85303_srtms2_settings');
-		grsetting.get('service','sRTMS2');
-		
-		grsetting.status = 'enter in getCpeAPI';
-		grsetting.update();
 		
 		try {
 			
@@ -41,8 +35,8 @@ pullFROMsRTMS.prototype = {
 
 			var js = JSON.parse(responseBody);
 			
-			grsetting.status = responseBody;
-			grsetting.update();
+			//grsetting.status = responseBody;
+			//grsetting.update();
 			
 			if(httpStatus=="200")
 			{
@@ -85,10 +79,7 @@ pullFROMsRTMS.prototype = {
 					var versionname = cpe_title.versionname;
 					var updatename = cpe_title.updatename;
 					var title = cpe_title.title;
-					
-					grsetting.status = productname;
-					grsetting.update();
-					
+										
 					//CPE Catalog
 					var grCpeCatalog = new GlideRecord('x_85303_srtms2_cpe_catalog');
 					var cpecatf=true;
@@ -142,15 +133,10 @@ pullFROMsRTMS.prototype = {
 		return responseObj;
 	},
 	
-	getSoftwareAPI: function(vGraphQLAPIKey,vNextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,vResourceID,vInstalledOn){
+	getSoftwareAPI: function(vLastRun,vGraphQLAPIKey,vNextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,vResourceID,vInstalledOn){
+		
 		var responseBody = "";
 		var responseObj = {};
-		
-		var grsetting = new GlideRecord('x_85303_srtms2_settings');
-		grsetting.get('service','sRTMS2');
-		
-		grsetting.status = 'enter in getSoftwareAPI';
-		grsetting.update();
 		
 		try {
 
@@ -235,10 +221,7 @@ pullFROMsRTMS.prototype = {
 						var type = details[j].type;
 												
 						if(type=='package'){
-							
-							//grsetting.status = 'enter package';
-							//grsetting.update();
-							
+													
 							//Software Discovery Model
 							var grSwDiscModel = new GlideRecord('cmdb_sam_sw_discovery_model');
 							var swdiscmodf=true;
@@ -249,12 +232,6 @@ pullFROMsRTMS.prototype = {
 							var resourcepkgid = '';
 							
 							var pkgPrimaryKey=pkgmanufacturer+'.'+pkgdisplayname+'..'+pkgversion+'.';
-
-							//grsetting.status = pkgPrimaryKey;
-							//grsetting.update();
-							
-							//grsetting.status = 'pre enter Discmodel';
-							//grsetting.update();
 							
 							if(!grSwDiscModel.get('primary_key',pkgPrimaryKey))
 							{
@@ -271,22 +248,13 @@ pullFROMsRTMS.prototype = {
 									swdiscmodf = true;
 								}
 							}
-							
-							//grsetting.status = 'pre enter software';
-							//grsetting.update();
-							
+														
 							//Software Installation
 							var grSwInstallation = new GlideRecord('cmdb_sam_sw_install');
 							var swinstf=true;
-							
-							//grsetting.status = 'Software Exists ?';
-							//grsetting.update();
-							
+														
 							if(!grSwInstallation.get('sys_id',resourcepkgid))
-							{
-								grsetting.status = 'Create Software';
-								grsetting.update();
-								
+							{							
 								grSwInstallation = new GlideRecord('cmdb_sam_sw_install');
 								swinstf=false;
 								
@@ -640,49 +608,33 @@ pullFROMsRTMS.prototype = {
 							//CPE Catalog
 							var grCpeCatalog = new GlideRecord('x_85303_srtms2_cpe_catalog');
 							var cpecatf=true;
-						
-							grsetting.status = 'pre enter CpeCatalog';
-							grsetting.update();
-							
+												
 							if(!grCpeCatalog.get('cpe23',cpe23))
 								cpecatf = false;
-
-							
+						
 							if(swinstf && cpecatf){
 								
 								//Software Installation CPE
 								var grSwInstallationCpe = new GlideRecord('x_85303_srtms2_software_installation_cpe');
-								var swinstcpef=false;
 
 								var querySwInstallationCpe ="cpe23="+grCpeCatalog.sys_id+"^installed_software="+grSwInstallation.sys_id+"^installed_on="+vInstalledOn+"";							
 								grSwInstallationCpe.addEncodedQuery(querySwInstallationCpe);							
 								grSwInstallationCpe.query();
 
 								while (grSwInstallationCpe.next()) {
-									swinstcpef=true;
 									break;
 								}
 
-								if(!swinstcpef){
-									
-									grSwInstallationCpe.initialize();
-									grSwInstallationCpe.cpe23=grCpeCatalog.sys_id;
-									grSwInstallationCpe.installed_software=grSwInstallation.sys_id;
-									grSwInstallationCpe.installed_on=vInstalledOn;			
-									grSwInstallationCpe.is_eol=is_eol;
-									grSwInstallationCpe.is_eos=is_eos;									
+								grSwInstallationCpe.cpe23=grCpeCatalog.sys_id;
+								grSwInstallationCpe.installed_software=grSwInstallation.sys_id;
+								grSwInstallationCpe.installed_on=vInstalledOn;			
+								grSwInstallationCpe.is_eol=is_eol;
+								grSwInstallationCpe.is_eos=is_eos;			
+								grSwInstallationCpe.last_run = vLastRun;
 
-									grSwInstallationCpe.insert();
-									swinstcpef = true;
-									
-								}
-								
-								grsetting.status = 'END';
-								grsetting.update();
-								
-								
+								grSwInstallationCpe.update();
+
 							}
-
 						}
 					}
 				}
@@ -696,14 +648,54 @@ pullFROMsRTMS.prototype = {
 		}
 		return responseObj;
 	},
+	
+	delSwInstallationCpe: function(vLastRun,vInstalledOn){
 		
-	getResourceAPI: function(vGraphQLAPIKey,vNextToken,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation){
+		var responseBody = "";
+		var responseObj = {};
+			
+		try {
+			
+			//Delete Outdated Software Records
+			var grSwInstallationCpe = new GlideRecord('x_85303_srtms2_software_installation_cpe');
+			var	querySwInstallationCpe = "installed_on="+vInstalledOn+'^last_run!='+vLastRun+'';
+			grSwInstallationCpe.addEncodedQuery(querySwInstallationCpe);							
+			grSwInstallationCpe.query();
+
+			while (grSwInstallationCpe.next()) {
+							
+				var installed_software = grSwInstallationCpe.installed_software;
+				
+				var grSwInstallation = new GlideRecord('cmdb_sam_sw_install');
+				
+				if(grSwInstallation.get('sys_id',installed_software))
+					grSwInstallation.deleteRecord();
+				
+				grSwInstallationCpe.deleteRecord();
+				
+			}
+					
+			responseObj.responseBody = '1';
+			
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+			responseObj.responseBody = responseBody;
+		}
+		return responseObj;
+		
+	},
+	
+	getResourceAPI: function(vLastRun,vGraphQLAPIKey,vNextToken,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation){
 		
 		var responseBody = "";
 		var responseObj = {};
 		
-		var grsetting = new GlideRecord('x_85303_srtms2_settings');
-		grsetting.get('service','sRTMS2');
+		var callLog = new logTOsRTMS();
+
+		//var grsetting = new GlideRecord('x_85303_srtms2_settings');
+		//grsetting.get('service','sRTMS2');
 				
 		try {
 			
@@ -765,7 +757,6 @@ pullFROMsRTMS.prototype = {
 						grComputer.query();					
 						
 						while (grComputer.next()) {
-							//gs.addInfoMessage(gr.number);
 							compf = true;
 							break;
 						}
@@ -837,37 +828,32 @@ pullFROMsRTMS.prototype = {
 						}
 						
 					}
-					
+
 					if(compf)
 					{
 						var installed_on = grComputer.sys_id;
 						
 						if(vModule == "All" || vModule == "sam"){
 							
-							
-							grsetting.status = 'pre software init 1';
-							grsetting.update();
-
-							var getSoftwareAPI = this.getSoftwareAPI(vGraphQLAPIKey,vNextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,resourceid,installed_on);
-
-							grsetting.status = 'post softwareinit 1';
-							grsetting.update();
-							
+							//Software API call							
 							var apisoftwarecounter=1;
+							callLog.setLog(vLastRun,'info','API: getSoftware','Resource: '+resourcename+' - Loop(s): '+apisoftwarecounter.toString());
+							
+							var getSoftwareAPI = this.getSoftwareAPI(vLastRun,vGraphQLAPIKey,vNextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,resourceid,installed_on);
+
 							
 							while(getSoftwareAPI.nextToken!=null && getSoftwareAPI.nextToken!=''){
 
-								grsetting.status = 'software loop '+apisoftwarecounter.toString();
-								grsetting.update();
+								apisoftwarecounter += 1;
+								callLog.setLog(vLastRun,'info','API: getSoftware','Resource: '+resourcename+' - Loop(s): '+apisoftwarecounter.toString());
 
-								i +=1;
-
-								getSoftwareAPI = this.getSoftwareAPI(vGraphQLAPIKey,getSoftwareAPI.nextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,resourceid,installed_on);
+								getSoftwareAPI = this.getSoftwareAPI(vLastRun,vGraphQLAPIKey,getSoftwareAPI.nextToken,vPageSize,vCreateSwDiscModel,vCreateSwInstallation,resourceid,installed_on);
 
 							}
-
-							grsetting.status = 'software job completed in '+apisoftwarecounter.toString()+' loops';
-							grsetting.update();
+							
+							//Delete SwInstallationCpe
+							callLog.setLog(vLastRun,'info','Delete outdated software','Resource: '+resourcename);
+							var delSwInstallationCpe = this.delSwInstallationCpe(vLastRun,installed_on);
 							
 						}
 					}				
@@ -885,89 +871,68 @@ pullFROMsRTMS.prototype = {
 
 	},
 	
-	getPull: function(){
+	getPull: function(vLastRun,vGraphQLAPIKey,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation){
+		
 		var responseBody = "";
+		var responseObj = {};
+		
 		try {
-			//var callLog = new logTOsRTMS();
-			var grsetting = new GlideRecord('x_85303_srtms2_settings');
-			grsetting.get('service','sRTMS2');
+			var callLog = new logTOsRTMS();
 			
-			grsetting.status = "TEST TEST TEST";
-			grsetting.update();
+			//var grsetting = new GlideRecord('x_85303_srtms2_settings');	
+			//grsetting.get('service','sRTMS2');
 			
-
-			var vGraphQLAPIKey = grsetting.graphql_api_key.getDecryptedValue();			
+			//var vLastRun = grsetting.last_run;
+			
+			//var vGraphQLAPIKey = grsetting.graphql_api_key.getDecryptedValue();			
 			var vNextToken = '';
-			var vPageSize = grsetting.api_page_size;
-			var vModule = grsetting.module;
-			var vCreateResource = grsetting.create_missing_resource;
-			var vCreateManufacturer = grsetting.create_missing_manufacturer;
-			var vCreateModel = grsetting.create_missing_model;
-			var vCreateSwDiscModel = grsetting.create_missing_software_discovery_model;
-			var vCreateSwInstallation = grsetting.create_missing_software_installation;
+			//var vPageSize = grsetting.api_page_size;
+			//var vModule = grsetting.module;
+			//var vCreateResource = grsetting.create_missing_resource;
+			//var vCreateManufacturer = grsetting.create_missing_manufacturer;
+			//var vCreateModel = grsetting.create_missing_model;
+			//var vCreateSwDiscModel = grsetting.create_missing_software_discovery_model;
+			//var vCreateSwInstallation = grsetting.create_missing_software_installation;
 			
-			//CPE API call
-			grsetting.status = 'pre CPE init 1';
-			grsetting.update();
-			
-			var getCpeAPI = this.getCpeAPI(vGraphQLAPIKey,'',vPageSize);
-			
-			grsetting.status = 'post CPE init 1';
-			grsetting.update();
-			
-			
+			//CPE API call		
 			var apicpecounter=1;
+			callLog.setLog(vLastRun,'info','API: getCpe','Loop(s): '+apicpecounter.toString());		
 			
-			while(getCpeAPI.nextToken!=null && getCpeAPI.nextToken!=''){
-				
-				grsetting.status = 'Resource loop '+apicpecounter.toString();
-				grsetting.update();
-				
+			var getCpeAPI = this.getCpeAPI(vLastRun,vGraphQLAPIKey,'',vPageSize);
+			
+			while((getCpeAPI.nextToken!=null) && (getCpeAPI.nextToken!='')){
+
 				apicpecounter +=1;
+				callLog.setLog(vLastRun,'info','API: getCpe','Loop(s): '+apicpecounter.toString());
 				
-				getCpeAPI = this.getCpeAPI(vGraphQLAPIKey,getCpeAPI.nextToken,vPageSize);
+				getCpeAPI = this.getCpeAPI(vLastRun,vGraphQLAPIKey,getCpeAPI.nextToken,vPageSize);
 				
 			}
-			
-			
-			grsetting.status = 'CPE job completed in '+apicpecounter.toString()+' loops';
-			grsetting.update();
-			
-			
-			//Resource API call
-			grsetting.status = 'pre Resource init 1';
-			grsetting.update();
-			
-			
-			var getResourceAPI = this.getResourceAPI(vGraphQLAPIKey,'',vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
-			
-			grsetting.status = 'post Resourceinit 1';
-			grsetting.update();
-			
-			
+					
+			//Resource API call			
 			var apiresourcecounter=1;
+			callLog.setLog(vLastRun,'info','API: getResource','Loop(s): '+apiresourcecounter.toString());
+			
+			var getResourceAPI = this.getResourceAPI(vLastRun,vGraphQLAPIKey,'',vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
+						
 			while(getResourceAPI.nextToken!=null && getResourceAPI.nextToken!=''){
 				
-				//grsetting.status = 'Resource loop '+apiresourcecounter.toString();
-				//grsetting.update();
-				
 				apiresourcecounter +=1;
+				callLog.setLog(vLastRun,'info','API: getResource','Loop(s): '+apiresourcecounter.toString());
 				
-				getResourceAPI = this.getResourceAPI(vGraphQLAPIKey,getResourceAPI.nextToken,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
+				getResourceAPI = this.getResourceAPI(vGraphQLAPIKey,vLastRun,getResourceAPI.nextToken,vPageSize,vModule,vCreateResource,vCreateManufacturer,vCreateModel,vCreateSwDiscModel,vCreateSwInstallation);
 				
 			}
 			
-			
-			grsetting.status = 'Resource job completed in '+apiresourcecounter.toString()+' loops';
-			grsetting.update();
+			responseObj.responseBody = '1';
 		
 		}
 		catch(ex) {
 			var message = ex.getMessage();
-			responseBody = ex.getMessage();
+			responseObj.responseBody = ex.getMessage();
 		}
-		
-		return responseBody;
+
+		return responseObj;
 	},
 	
     type: 'pullFROMsRTMS'
@@ -977,7 +942,7 @@ pullFROMsRTMS.prototype = {
         <sys_created_on>2020-02-25 21:32:46</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>a4d8937b2f830010281fd5f62799b67e</sys_id>
-        <sys_mod_count>221</sys_mod_count>
+        <sys_mod_count>311</sys_mod_count>
         <sys_name>pullFROMsRTMS</sys_name>
         <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
         <sys_policy>read</sys_policy>
@@ -985,6 +950,6 @@ pullFROMsRTMS.prototype = {
         <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
         <sys_update_name>sys_script_include_a4d8937b2f830010281fd5f62799b67e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-02-27 18:16:10</sys_updated_on>
+        <sys_updated_on>2020-03-09 00:49:55</sys_updated_on>
     </sys_script_include>
 </record_update>
