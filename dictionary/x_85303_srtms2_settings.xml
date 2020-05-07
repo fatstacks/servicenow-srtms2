@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="Settings" max_length="40" name="x_85303_srtms2_settings" type="collection">
-        <element label="Active" max_length="10" name="active" type="boolean"/>
         <element default="1000" label="API Page Size" max_length="40" name="api_page_size" type="integer"/>
         <element label="Create Missing Manufacturer" max_length="40" name="create_missing_manufacturer" type="boolean"/>
         <element label="Create Missing Model" max_length="40" name="create_missing_model" type="boolean"/>
@@ -15,7 +14,44 @@
                 <element inactive_on_update="false" label="Software Asset Management" sequence="1" value="sam"/>
             </choice>
         </element>
-        <element choice="3" default="daily" label="Run" max_length="40" name="run" type="choice">
+        <element label="Scheduler Active" max_length="40" name="scheduler_active" type="boolean"/>
+        <element choice="3" default="1" label="Scheduler Day of Month" max_length="40" name="scheduler_monthly_day" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="1" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="2" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="3" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="4" sequence="4" value="4"/>
+                <element inactive_on_update="false" label="5" sequence="5" value="5"/>
+                <element inactive_on_update="false" label="6" sequence="6" value="6"/>
+                <element inactive_on_update="false" label="7" sequence="7" value="7"/>
+                <element inactive_on_update="false" label="8" sequence="8" value="8"/>
+                <element inactive_on_update="false" label="9" sequence="9" value="9"/>
+                <element inactive_on_update="false" label="10" sequence="10" value="10"/>
+                <element inactive_on_update="false" label="11" sequence="11" value="11"/>
+                <element inactive_on_update="false" label="12" sequence="12" value="12"/>
+                <element inactive_on_update="false" label="13" sequence="13" value="13"/>
+                <element inactive_on_update="false" label="14" sequence="14" value="14"/>
+                <element inactive_on_update="false" label="15" sequence="15" value="15"/>
+                <element inactive_on_update="false" label="16" sequence="16" value="16"/>
+                <element inactive_on_update="false" label="17" sequence="17" value="17"/>
+                <element inactive_on_update="false" label="18" sequence="18" value="18"/>
+                <element inactive_on_update="false" label="19" sequence="19" value="19"/>
+                <element inactive_on_update="false" label="20" sequence="20" value="20"/>
+                <element inactive_on_update="false" label="21" sequence="21" value="21"/>
+                <element inactive_on_update="false" label="22" sequence="22" value="22"/>
+                <element inactive_on_update="false" label="23" sequence="23" value="23"/>
+                <element inactive_on_update="false" label="24" sequence="24" value="24"/>
+                <element inactive_on_update="false" label="25" sequence="25" value="25"/>
+                <element inactive_on_update="false" label="26" sequence="26" value="26"/>
+                <element inactive_on_update="false" label="27" sequence="27" value="27"/>
+                <element inactive_on_update="false" label="28" sequence="28" value="28"/>
+                <element inactive_on_update="false" label="29" sequence="29" value="29"/>
+                <element inactive_on_update="false" label="30" sequence="30" value="30"/>
+                <element inactive_on_update="false" label="31" sequence="31" value="31"/>
+            </choice>
+        </element>
+        <element label="Scheduler Period" max_length="40" name="scheduler_period" type="glide_duration"/>
+        <element choice="3" default="daily" label="Scheduler Run" max_length="40" name="scheduler_run" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Daily" sequence="0" value="daily"/>
                 <element inactive_on_update="false" label="Weekly" sequence="1" value="weekly"/>
@@ -24,8 +60,41 @@
                 <element inactive_on_update="false" label="Once" sequence="4" value="once"/>
             </choice>
         </element>
+        <element label="Scheduler Start" max_length="40" name="scheduler_start" type="glide_date_time"/>
+        <element label="Scheduler Time" max_length="40" name="scheduler_time" type="glide_time"/>
+        <element choice="3" default="sunday" label="Scheduler Day of Week" max_length="40" name="scheduler_weekly_day" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Monday" sequence="0" value="monday"/>
+                <element inactive_on_update="false" label="Tuesday" sequence="1" value="tuesday"/>
+                <element inactive_on_update="false" label="Wednesday" sequence="2" value="wednesday"/>
+                <element inactive_on_update="false" label="Thursday" sequence="3" value="thursday"/>
+                <element inactive_on_update="false" label="Friday" sequence="4" value="friday"/>
+                <element inactive_on_update="false" label="Saturday" sequence="5" value="saturday"/>
+                <element inactive_on_update="false" label="Sunday" sequence="6" value="sunday"/>
+            </choice>
+        </element>
         <element display="true" label="Service" max_length="255" name="service" read_only="true" type="string"/>
+        <element choice="3" default="all" label="ServiceNow Connect Data" max_length="40" name="servicenow_connect_data" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="All" sequence="1" value="all"/>
+                <element inactive_on_update="false" label="By Device Name" sequence="2" value="devicename"/>
+                <element inactive_on_update="false" label="By Device ID" sequence="3" value="deviceid"/>
+                <element inactive_on_update="false" label="Last X Device(s)" sequence="4" value="lastxdevices"/>
+            </choice>
+        </element>
+        <element choice="3" default="anonym" label="ServiceNow Connect Mode" max_length="40" name="servicenow_connect_mode" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Full" sequence="1" value="full"/>
+                <element inactive_on_update="false" label="Partial" sequence="2" value="partial"/>
+                <element inactive_on_update="false" label="Anonym" sequence="3" value="anonym"/>
+            </choice>
+        </element>
+        <element label="ServiceNow Device List (ID/Name)" max_length="1024" name="servicenow_device_list_id_name" type="string"/>
+        <element default="100" label="ServiceNow Last X Devices" max_length="40" name="servicenow_last_x_devices" type="integer"/>
+        <element label="ServiceNow Login" max_length="255" name="servicenow_login" type="string"/>
+        <element default="10000" label="ServiceNow PageSize API" max_length="40" name="servicenow_pagesize_api" type="integer"/>
+        <element label="ServiceNow Password" max_length="255" name="servicenow_password" type="password2"/>
+        <element label="ServiceNow Source" max_length="40" name="servicenow_source" type="boolean"/>
         <element label="Status" max_length="255" name="status" read_only="true" type="string"/>
-        <element label="Time" max_length="40" name="time" type="glide_time"/>
     </element>
 </database>

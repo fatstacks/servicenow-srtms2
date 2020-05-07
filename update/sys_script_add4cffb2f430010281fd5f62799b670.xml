@@ -32,13 +32,13 @@
 	// Add your code here
 	var rec = new GlideRecord('sysauto_script');
 	rec.get('name', 'schedulerRunSRTMS');
-	rec.active=current.active;
-	rec.run_time=current.time;
-	rec.run_type=current.run_type;
-	rec.run_dayofweek=current.day;
-	rec.run_dayofmonth=current.run_day_of_month;
-	rec.run_period=current.run_period2;
-	rec.run_start=current.run_start;
+	rec.active=current.scheduler_active;
+	rec.run_time=current.scheduler_time;
+	rec.run_type=current.scheduler_run;
+	rec.run_dayofweek=current.scheduler_weekly_day;
+	rec.run_dayofmonth=current.scheduler_monthly_day;
+	rec.run_period=current.scheduler_period;
+	rec.run_start=current.scheduler_start;
 	rec.update();
 	
 })(current, previous);]]></script>
@@ -49,7 +49,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>add4cffb2f430010281fd5f62799b670</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>ScheduleRule</sys_name>
         <sys_overrides/>
         <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
@@ -58,7 +58,7 @@
         <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
         <sys_update_name>sys_script_add4cffb2f430010281fd5f62799b670</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-02-25 20:04:52</sys_updated_on>
+        <sys_updated_on>2020-03-14 18:47:55</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

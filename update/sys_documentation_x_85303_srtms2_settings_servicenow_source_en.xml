@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="servicenow_source" label="ServiceNow Source" language="en" table="x_85303_srtms2_settings">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>servicenow_source</element>
+            <help/>
+            <hint/>
+            <label>ServiceNow Source</label>
+            <language>en</language>
+            <name>x_85303_srtms2_settings</name>
+            <plural>ServiceNow Sources</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-13 23:17:14</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>911493552f238010281fd5f62799b60d</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_name>ServiceNow Source</sys_name>
+            <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+            <sys_update_name>sys_documentation_x_85303_srtms2_settings_servicenow_source_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-13 23:51:31</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

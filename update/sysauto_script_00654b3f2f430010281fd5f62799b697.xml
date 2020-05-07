@@ -6,7 +6,7 @@
         <name>schedulerRunSRTMS</name>
         <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
         <run_as_tz/>
-        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofmonth/>
         <run_dayofweek/>
         <run_period/>
         <run_start/>
@@ -41,7 +41,7 @@ if(responseBody != "1")
         <sys_created_on>2020-02-25 20:06:47</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>00654b3f2f430010281fd5f62799b697</sys_id>
-        <sys_mod_count>1123</sys_mod_count>
+        <sys_mod_count>1145</sys_mod_count>
         <sys_name>schedulerRunSRTMS</sys_name>
         <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
         <sys_policy/>
@@ -49,7 +49,7 @@ if(responseBody != "1")
         <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
         <sys_update_name>sysauto_script_00654b3f2f430010281fd5f62799b697</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-03-09 00:57:30</sys_updated_on>
+        <sys_updated_on>2020-03-16 13:56:51</sys_updated_on>
         <upgrade_safe>false</upgrade_safe>
     </sysauto_script>
 </record_update>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="run" table="x_85303_srtms2_settings">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="scheduler_time" table="x_85303_srtms2_settings">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
@@ -11,13 +11,13 @@
 	return '';  // return the calculated value
 
 })(current);]]></calculation>
-        <choice>3</choice>
+        <choice/>
         <choice_field/>
         <choice_table/>
-        <column_label>Run</column_label>
+        <column_label>Scheduler Time</column_label>
         <comments/>
         <create_roles/>
-        <default_value>daily</default_value>
+        <default_value/>
         <defaultsort/>
         <delete_roles/>
         <dependent/>
@@ -27,12 +27,12 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>run</element>
+        <element>scheduler_time</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="Choice">choice</internal_type>
+        <internal_type display_value="">glide_time</internal_type>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
         <name>x_85303_srtms2_settings</name>
@@ -52,18 +52,18 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2020-02-25 19:15:33</sys_created_on>
+        <sys_created_on>2020-03-14 00:36:21</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>0c99bef32f430010281fd5f62799b6ce</sys_id>
+        <sys_id>012623152f638010281fd5f62799b6dc</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>Run</sys_name>
+        <sys_name>Scheduler Time</sys_name>
         <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
-        <sys_update_name>sys_dictionary_x_85303_srtms2_settings_run</sys_update_name>
+        <sys_update_name>sys_dictionary_x_85303_srtms2_settings_scheduler_time</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-02-25 19:15:33</sys_updated_on>
+        <sys_updated_on>2020-03-14 00:36:21</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

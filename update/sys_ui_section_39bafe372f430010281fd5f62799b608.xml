@@ -1,44 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_ui_section caption="Scheduler" section_id="39bafe372f430010281fd5f62799b608" sys_domain="global" table="x_85303_srtms2_settings" version="3" view="">
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>active</element>
+            <element>scheduler_active</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-02-25 19:21:58</sys_created_on>
-            <sys_id>513bb6772f430010281fd5f62799b6f7</sys_id>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>e0471fa12feb8010281fd5f62799b6fc</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-02-25 19:21:58</sys_updated_on>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>run</element>
+            <element>scheduler_run</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-02-25 19:21:58</sys_created_on>
-            <sys_id>d13bb6772f430010281fd5f62799b6f7</sys_id>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>64471fa12feb8010281fd5f62799b6fc</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-02-25 19:21:58</sys_updated_on>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>time</element>
+            <element>scheduler_weekly_day</element>
             <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-02-25 19:21:58</sys_created_on>
-            <sys_id>553bb6772f430010281fd5f62799b6f7</sys_id>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>e4471fa12feb8010281fd5f62799b6fc</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-02-25 19:21:58</sys_updated_on>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>scheduler_monthly_day</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>68471fa12feb8010281fd5f62799b6fc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>scheduler_period</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>e8471fa12feb8010281fd5f62799b6fc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>scheduler_start</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>6c471fa12feb8010281fd5f62799b6fc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>scheduler_time</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-14 18:09:35</sys_created_on>
+            <sys_id>ec471fa12feb8010281fd5f62799b6fc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="Scheduler" display_value="Scheduler" name="x_85303_srtms2_settings" sys_domain="global" view="Default view">39bafe372f430010281fd5f62799b608</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-14 18:09:35</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

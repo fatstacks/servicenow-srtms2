@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_85303_srtms2.triggerProcessServiceNowTOsRTMS</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>triggerProcessServiceNowTOsRTMS</name>
+        <script><![CDATA[var triggerProcessServiceNowTOsRTMS = Class.create();
+triggerProcessServiceNowTOsRTMS.prototype = {
+    initialize: function() {
+    },
+	
+	setTrigger: function(vServiceNowDataSource,vServiceNowURI,vServiceNowLogin,vServiceNowPwd,vServiceNowMode,vServiceNowPageSizeAPI,vServiceNowData){
+		var responseBody = "";
+		var responseObj = {};
+		
+		try {
+			//var vURI = '';
+			/*
+			var grsetting = new GlideRecord('x_85303_srtms_settings');
+
+			grsetting.get('service','sRTMS');
+			var vURI = grsetting.url;
+			//var vLogin = grsetting.login;
+			//var vPwd = grsetting.password2.getDecryptedValue();
+			var vSnowLogin = grsetting.servicenow_login;
+			var vSnowPwd = grsetting.servicenow_password.getDecryptedValue();
+			var vSessionToken = grsetting.sessiontoken;
+			var vJobName = grsetting.job_name;
+			var vLastRun = grsetting.last_run;
+			var vConnectMode = grsetting.connect_mode;
+			var vConnectDataSet = '';
+			var vConnectData = grsetting.connect_data;
+			var vDeviceList = grsetting.device_list_id_name;
+			var vLastXDevices = grsetting.last_x_devices;
+			var vSnowPageSize = grsetting.servicenow_api_page_size;
+						
+			if(vConnectData=='By Device Name')
+			{
+				vConnectDataSet = '\"deviceNames\":\"'+vDeviceList+'\",';
+			}
+			if(vConnectData=='By Device ID')
+			{
+				vConnectDataSet = '\"deviceIDs\":\"'+vDeviceList+'\",';
+			}
+			if(vConnectData=='Last X Devices')
+			{
+				vConnectDataSet = '\"lastXDevices\":{\"sysparm_offset\":1,\"sysparm_limit\":'+vLastXDevices+'},';
+			}
+			
+			var vInstanceURL = gs.getProperty('glide.servlet.uri');
+			*/
+			
+			var r = new sn_ws.RESTMessageV2('x_85303_srtms2.sRTMS2 - Process', 'Trigger');
+			
+			//var vDataSource = 'servicenow';
+			//var vServiceNowURI = gs.getProperty('glide.servlet.uri');
+			//var vServiceNowLogin = 'admin';
+			//var vServiceNowPwd = 'Fatstacks2016!';
+			//var vServiceNowMode = 'anonym';
+			//var vServiceNowPageSizeAPI = 1000;
+			//var vServiceNowData = 'lastxdevices';	
+			//var vServiceNowDeviceList = '*BOW-IBM,*CHUCK-IBM,Apple - MacBook Pro 15" for Technical Staff';
+			//var vServiceNowDeviceList = '71c031213784200044e0bfc8bcbe5de1,46b87032a9fe198101b2df13015be972,82073629c0a8018b03ea0c5d9071f599';
+			//var vServiceNowLastXDevices = 1;
+			
+			var vServiceNowDataSet = '';
+			
+			switch(vServiceNowData){
+				case 'devicename':
+					vServiceNowDataSet = '"devicename":"'+vServiceNowDeviceList+'",';
+					break;
+				case 'deviceid':
+					vServiceNowDataSet = '"deviceid":"'+vServiceNowDeviceList+'",';
+					break;
+				case 'lastxdevices':
+					vServiceNowDataSet = '"lastxdevices":'+vServiceNowLastXDevices+',';
+					break;
+				default:
+					vServiceNowDataSet = '';
+					break;
+			}
+			
+			r.setStringParameter('DATASOURCE', vServiceNowDataSource);
+			r.setStringParameter('URI', vServiceNowURI);
+			r.setStringParameter('LOGIN', vServiceNowLogin);
+			r.setStringParameter('PWD', vServiceNowPwd);
+			r.setStringParameter('MODE', vServiceNowMode);
+			r.setStringParameter('PAGESIZE', vServiceNowPageSizeAPI);
+			r.setStringParameter('DATA', vServiceNowData);
+			r.setStringParameterNoEscape('DATASET', vServiceNowDataSet);
+			
+			/*
+			var response = r.execute();
+			responseBody = response.getBody();
+			var httpStatus = response.getStatusCode();
+			
+			var js = JSON.parse(responseBody);
+			var error_code = js.error_code;
+			var success = js.success;
+			var callLog = new logTOsRTMS();
+			
+			if(httpStatus=="200" && error_code=="0" && success==true)
+			{	
+				var jobID = js.results.jobId;
+				grsetting.jobid = jobID;
+				grsetting.update();
+				
+				
+				callLog.setLog(vLastRun,'Info','Trigger','ServiceNow JobID: '+jobID);
+				
+				//responseBody="1";
+				responseBody="1";
+			}
+			else
+			{
+					callLog.setLog(vLastRun,'Info','Trigger','Error: '+responseBody);
+			}
+			*/
+		}
+		catch(ex) {
+			var message = ex.getMessage();
+			responseBody = ex.getMessage();
+			responseObj.responseBody = ex.getMessage();
+		}
+		return responseObj;
+	},
+	
+    type: 'triggerProcessServiceNowTOsRTMS'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-16 18:39:52</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b14135d62fa70410281fd5f62799b622</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>triggerProcessServiceNowTOsRTMS</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_update_name>sys_script_include_b14135d62fa70410281fd5f62799b622</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-16 19:13:34</sys_updated_on>
+    </sys_script_include>
+</record_update>

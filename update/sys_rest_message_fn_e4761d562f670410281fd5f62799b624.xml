@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn">
+    <sys_rest_message_fn action="INSERT_OR_UPDATE">
+        <authentication_type>inherit_from_parent</authentication_type>
+        <basic_auth_password/>
+        <basic_auth_profile/>
+        <basic_auth_user>admin</basic_auth_user>
+        <content>{&#13;
+  "datasource": "${DATASOURCE}",&#13;
+  "${DATASOURCE}": {&#13;
+    "uri": "${URI}",&#13;
+    "login": "${LOGIN}",&#13;
+    "pwd": "${PWD}",&#13;
+    "mode": "${MODE}",&#13;
+    "pagesizeapi": ${PAGESIZE},&#13;
+    "data": "${DATA}",&#13;
+   ${DATASET}&#13;
+  }&#13;
+}</content>
+        <function_name>Trigger</function_name>
+        <http_method>put</http_method>
+        <lock>false</lock>
+        <oauth2_profile/>
+        <protocol_name/>
+        <qualified_name>sRTMS2 - Process [ Trigger ]</qualified_name>
+        <rest_endpoint>https://srtms2.fatstacks.tech/stream/trigger</rest_endpoint>
+        <rest_message display_value="sRTMS2 - Process">2f85fcde2fe30410281fd5f62799b661</rest_message>
+        <sys_class_name>sys_rest_message_fn</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-16 16:43:16</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>e4761d562f670410281fd5f62799b624</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Trigger</sys_name>
+        <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+        <sys_update_name>sys_rest_message_fn_e4761d562f670410281fd5f62799b624</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-16 18:49:42</sys_updated_on>
+        <use_basic_auth>false</use_basic_auth>
+        <use_mid_server/>
+        <use_mutual_auth>false</use_mutual_auth>
+    </sys_rest_message_fn>
+</record_update>

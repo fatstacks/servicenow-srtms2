@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="servicenow_connect_data" table="x_85303_srtms2_settings" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>servicenow_connect_data</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>All</label>
+            <language>en</language>
+            <name>x_85303_srtms2_settings</name>
+            <sequence>1</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-13 23:28:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3c96d3d52f238010281fd5f62799b610</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-13 23:28:20</sys_updated_on>
+            <value>all</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>servicenow_connect_data</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>By Device Name</label>
+            <language>en</language>
+            <name>x_85303_srtms2_settings</name>
+            <sequence>2</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-13 23:29:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>caa617d52f238010281fd5f62799b64c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-13 23:29:46</sys_updated_on>
+            <value>devicename</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>servicenow_connect_data</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>By Device ID</label>
+            <language>en</language>
+            <name>x_85303_srtms2_settings</name>
+            <sequence>3</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-13 23:30:08</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8ef693d52f238010281fd5f62799b6b1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-13 23:30:08</sys_updated_on>
+            <value>deviceid</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>servicenow_connect_data</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Last X Device(s)</label>
+            <language>en</language>
+            <name>x_85303_srtms2_settings</name>
+            <sequence>4</sequence>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-13 23:30:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>730793d52f238010281fd5f62799b62d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-13 23:30:48</sys_updated_on>
+            <value>lastxdevices</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>servicenow_connect_data</element>
+            <name>x_85303_srtms2_settings</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-03-13 23:28:20</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>0ca65f952f238010281fd5f62799b645</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>servicenow_connect_data</sys_name>
+            <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
+            <sys_update_name>sys_choice_x_85303_srtms2_settings_servicenow_connect_data</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-03-13 23:28:20</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

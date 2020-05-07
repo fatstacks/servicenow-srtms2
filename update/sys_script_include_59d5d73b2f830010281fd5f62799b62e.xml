@@ -18,13 +18,14 @@ processSRTMS.prototype = {
 			var vLastRun =  new GlideDateTime();
 			
 			var callLog = new logTOsRTMS();
-			callLog.setLog(vLastRun,'Info','Process','Start');
+
+			callLog.setLog(vLastRun,'info','Process','Start');
 			
 			var grsetting = new GlideRecord('x_85303_srtms2_settings');
 			grsetting.get('service','sRTMS2');
 			
 			//var vDeleteOutdatedRecords = grsetting.delete_outdated_records;
-			//var vSnowSrc = grsetting.servicenow;
+			var vServiceNowSrc = grsetting.servicenow_source;
 			//var vAwsSrc = grsetting.aws_source;
 			
 			var vGraphQLAPIKey = grsetting.graphql_api_key.getDecryptedValue();			
@@ -56,13 +57,26 @@ processSRTMS.prototype = {
 			*/
 			//callLog.setLog('','Info','Process sRTMS','End Connect');
 			
-			/*
+			
 			if(vFullProcess==true)
 			{
-				if(vSnowSrc)
+				if(vServiceNowSrc)
 				{
 
 					//callLog.setLog('','Info','Trigger sRTMS Job','Start Job');
+					callLog.setLog(vLastRun,'info','Trigger ServiceNow process','Start');
+					
+					var vServiceNowDataSource = 'servicenow';
+					var vServiceNowURI = gs.getProperty('glide.servlet.uri');
+					var vServiceNowLogin = grsetting.servicenow_login;
+					var vServiceNowPwd = grsetting.servicenow_password;
+					var vServiceNowMode = grsetting.servicenow_connect_mode;
+					var vServiceNowPageSizeAPI = grsetting.servicenow_pagesize_api;
+					var vServiceNowData = grsetting.servicenow_connect_data;	
+					var vServiceNowDeviceList = grsetting.servicenow_device_list_id_name;
+					var vServiceNowLastXDevices = grsetting.servicenow_last_x_devices;
+
+					/*
 					var trigJobSnow = new triggerJobSnowTOsRTMS();
 					var responseTrigJobSnow = trigJobSnow.getTriggerJob();
 					if(responseTrigJobSnow != "1")
@@ -70,8 +84,9 @@ processSRTMS.prototype = {
 						responseBody = responseTrigJobSnow;
 						return responseBody;
 					}
+					*/
 				}
-				
+				/*
 				if(vAwsSrc)
 				{
 
@@ -116,8 +131,9 @@ processSRTMS.prototype = {
 						return responseBody;
 					}
 				}
+				*/
 			}
-			*/
+			
 			
 			callLog.setLog(vLastRun,'info','Pull results from sRTMS','Start');
 			
@@ -169,7 +185,7 @@ processSRTMS.prototype = {
         <sys_created_on>2020-02-25 21:18:41</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>59d5d73b2f830010281fd5f62799b62e</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>31</sys_mod_count>
         <sys_name>processSRTMS</sys_name>
         <sys_package display_value="sRTMS2" source="x_85303_srtms2">fa2aea772f030010281fd5f62799b6a6</sys_package>
         <sys_policy>read</sys_policy>
@@ -177,6 +193,6 @@ processSRTMS.prototype = {
         <sys_scope display_value="sRTMS2">fa2aea772f030010281fd5f62799b6a6</sys_scope>
         <sys_update_name>sys_script_include_59d5d73b2f830010281fd5f62799b62e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-03-09 00:57:22</sys_updated_on>
+        <sys_updated_on>2020-03-16 19:11:17</sys_updated_on>
     </sys_script_include>
 </record_update>
